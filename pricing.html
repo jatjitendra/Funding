@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+
+    <script>
+        (function () {
+            var t = localStorage.getItem("theme");
+            if (t) {
+                document.documentElement.setAttribute("data-theme", t);
+            }
+        })();
+    </script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Pricing - ApexFund</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <div class="demo-banner">
+        Demo portfolio project — no real accounts, payments, or trading capital.
+    </div>
+
+    <header class="site-header">
+        <nav class="nav container">
+
+            <a href="index.html" class="nav-brand">
+                <span class="mark">A</span> ApexFund
+            </a>
+
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="pricing.html">Pricing</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+            </ul>
+
+            <div class="nav-actions-group">
+                <div class="nav-actions" id="navActions"></div>
+
+                <button
+                    id="themeToggle"
+                    class="theme-toggle"
+                    aria-label="Toggle dark/light theme"
+                    type="button"
+                >
+                    &#127769;
+                </button>
+            </div>
+
+            <button
+                class="nav-toggle"
+                aria-label="Toggle menu"
+                type="button"
+            >
+                &#9776;
+            </button>
+
+        </nav>
+    </header>
+
+    <main>
+
+        <section class="section section-dark pricing-green">
+            <div class="container">
+
+                <div class="section-head section-head-tight">
+                    <span class="eyebrow">Challenge Plans</span>
+                    <h2>Choose your account size</h2>
+                </div>
+
+                <div class="pricing-table-wrap">
+
+                    <table class="pricing-table">
+
+                        <thead>
+                            <tr>
+                                <th>Account Size</th>
+                                <th>Price</th>
+                                <th>Evaluation Steps</th>
+                                <th>Profit Split</th>
+                                <th>Max Daily Loss</th>
+                                <th>Max Total Loss</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="pricingRows"></tbody>
+
+                    </table>
+
+                </div>
+
+                <p class="pricing-note">
+                    One-time simulated evaluation fee. Prices shown are demo placeholders.
+                </p>
+
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+
+            <p class="footer-disclaimer">
+                ApexFund is a portfolio/demo project. All trading, funding, and payouts shown
+                are simulated for demonstration purposes only. This is not a real financial
+                product or offer.
+            </p>
+
+            <div class="footer-grid">
+
+                <div class="footer-brand">
+
+                    <div class="nav-brand" style="margin-bottom: 10px;">
+                        <span class="mark">A</span> ApexFund
+                    </div>
+
+                    <p>
+                        A demo funded-trading experience built for portfolio purposes.
+                    </p>
+
+                </div>
+
+                <div>
+                    <h4>Company</h4>
+
+                    <ul>
+                        <li>
+                            <a href="about.html">About Us</a>
+                        </li>
+                        <li>
+                            <a href="faq.html">FAQ</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4>Product</h4>
+
+                    <ul>
+                        <li>
+                            <a href="pricing.html">Pricing</a>
+                        </li>
+                        <li>
+                            <a href="signup.html">Sign Up</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4>Account</h4>
+
+                    <ul>
+                        <li>
+                            <a href="login.html">Login</a>
+                        </li>
+                        <li>
+                            <a href="dashboard.html">Dashboard</a>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="footer-bottom">
+                &copy; 2026 ApexFund Demo. Built for portfolio purposes only.
+            </div>
+
+        </div>
+    </footer>
+
+    <script src="js/data.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/nav.js"></script>
+    <script src="js/theme.js"></script>
+
+    <script>
+        function renderRows() {
+            document.getElementById("pricingRows").innerHTML = PLANS
+                .map(function (p) {
+                    return `
+                        <tr class="${p.mostPopular ? "now-popular" : ""}">
+                            <td>
+                                ${formatINR(p.accountSize)}
+                                ${p.mostPopular
+                                    ? '<span class="popular-tag">Most Popular</span>'
+                                    : ""}
+                            </td>
+
+                            <td class="price">
+                                <span class="price-strike">
+                                    ${formatINR(p.originalPrice)}
+                                </span>
+                                ${formatINR(p.price)}
+                            </td>
+
+                            <td>${p.evalSteps}</td>
+                            <td>${p.profitSplit}</td>
+                            <td>${p.maxDailyLossPct}%</td>
+                            <td>${p.maxTotalLossPct}%</td>
+
+                            <td>
+                                <a
+                                    href="checkout.html?plan=${encodeURIComponent(p.id)}"
+                                    class="btn btn-primary btn-sm"
+                                >
+                                    Buy Challenge
+                                </a>
+                            </td>
+                        </tr>
+                    `;
+                })
+                .join("");
+        }
+
+        renderRows();
+    </script>
+
+</body>
+</html>

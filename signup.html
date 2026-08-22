@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+
+    <script>
+        (function () {
+            var t = localStorage.getItem("theme");
+            if (t) {
+                document.documentElement.setAttribute("data-theme", t);
+            }
+        })();
+    </script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Sign Up - ApexFund</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <header class="site-header">
+        <nav class="nav container">
+
+            <a href="index.html" class="nav-brand">
+                <span class="mark">A</span> ApexFund
+            </a>
+
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="pricing.html">Pricing</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+            </ul>
+
+            <div class="nav-actions-group">
+                <div class="nav-actions" id="navActions"></div>
+
+                <button
+                    id="themeToggle"
+                    class="theme-toggle"
+                    aria-label="Toggle dark/light theme"
+                    type="button"
+                >
+                    &#127769;
+                </button>
+            </div>
+
+            <button
+                class="nav-toggle"
+                aria-label="Toggle menu"
+                type="button"
+            >
+                &#9776;
+            </button>
+
+        </nav>
+    </header>
+
+    <main>
+        <div class="auth-shell">
+
+            <div class="auth-card">
+
+                <h1>Create your account</h1>
+
+                <p class="sub">
+                    Sign up to buy a demo challenge and track it on your dashboard.
+                </p>
+
+                <div id="formMsg"></div>
+
+                <form id="signupForm">
+
+                    <div class="field">
+                        <label for="name">Full name</label>
+
+                        <input
+                            type="text"
+                            id="name"
+                            required
+                            autocomplete="name"
+                        >
+                    </div>
+
+                    <div class="field">
+                        <label for="email">Email</label>
+
+                        <input
+                            type="email"
+                            id="email"
+                            required
+                            autocomplete="email"
+                        >
+                    </div>
+
+                    <div class="field">
+                        <label for="password">Password</label>
+
+                        <input
+                            type="password"
+                            id="password"
+                            required
+                            minlength="6"
+                            autocomplete="new-password"
+                        >
+                    </div>
+
+                    <button
+                        type="submit"
+                        class="btn btn-primary btn-block"
+                    >
+                        Create Account
+                    </button>
+
+                </form>
+
+                <div class="auth-foot">
+                    Already have an account?
+                    <a href="login.html">Log in</a>
+                </div>
+
+            </div>
+
+        </div>
+    </main>
+
+    <script src="js/data.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/nav.js"></script>
+    <script src="js/theme.js"></script>
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+
+        if (getSession()) {
+            window.location.href =
+                params.get("next") || "dashboard.html";
+        }
+
+        document
+            .getElementById("signupForm")
+            .addEventListener("submit", (e) => {
+                e.preventDefault();
+
+                const name = document
+                    .getElementById("name")
+                    .value
+                    .trim();
+
+                const email = document
+                    .getElementById("email")
+                    .value
+                    .trim();
+
+                const password = document
+                    .getElementById("password")
+                    .value;
+
+                const result = signup({
+                    name,
+                    email,
+                    password
+                });
+
+                const msg = document.getElementById("formMsg");
+
+                if (!result.ok) {
+                    msg.innerHTML =
+                        `<div class="form-msg error">${result.error}</div>`;
+                    return;
+                }
+
+                window.location.href =
+                    params.get("next") || "dashboard.html";
+            });
+    </script>
+
+</body>
+</html>

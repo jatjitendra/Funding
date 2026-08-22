@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+
+    <script>
+        (function () {
+            var t = localStorage.getItem("theme");
+            if (t) {
+                document.documentElement.setAttribute("data-theme", t);
+            }
+        })();
+    </script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>About Us - ApexFund</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <div class="demo-banner">
+        Demo portfolio project — no real accounts, payments, or trading capital.
+    </div>
+
+    <header class="site-header">
+        <nav class="nav container">
+
+            <a href="index.html" class="nav-brand">
+                <span class="mark">A</span> ApexFund
+            </a>
+
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="pricing.html">Pricing</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+            </ul>
+
+            <div class="nav-actions" id="navActions"></div>
+
+            <div class="nav-actions-group">
+                <button
+                    id="themeToggle"
+                    class="theme-toggle"
+                    aria-label="Toggle dark/light theme"
+                    type="button"
+                >
+                    &#127769;
+                </button>
+            </div>
+
+        </nav>
+
+        <button
+            class="nav-toggle"
+            aria-label="Toggle menu"
+            type="button"
+        >
+            &#9776;
+        </button>
+    </header>
+
+    <main>
+
+        <section class="section">
+            <div class="container">
+                <div class="two-col">
+
+                    <div>
+                        <span class="eyebrow">About ApexFund</span>
+
+                        <h2 style="font-size: 2rem; margin: 14px 0;">
+                            A demo built to show what a funded-trading platform looks like
+                        </h2>
+
+                        <p style="color: var(--gray-600); margin-bottom: 16px;">
+                            ApexFund is a portfolio project inspired by real
+                            proprietary-trading-challenge platforms. It exists to demonstrate
+                            a full marketing experience for a funded-trading platform.
+                        </p>
+
+                        <p style="color: var(--gray-600); margin-bottom: 16px;">
+                            Every "account," "payout," and "profit split" you see here is a
+                            simulated number generated for demo purposes, not real money,
+                            brokerage accounts, or trading capital.
+                        </p>
+                    </div>
+
+                    <div>
+                        <div class="dash-card" style="padding: 32px;">
+                            <h4 style="margin-top: 0;">
+                                What this project demonstrates
+                            </h4>
+
+                            <ul
+                                style="
+                                    color: var(--gray-600);
+                                    font-size: 0.9rem;
+                                    display: flex;
+                                    flex-direction: column;
+                                    gap: 10px;
+                                    list-style: disc;
+                                    padding-left: 18px;
+                                "
+                            >
+                                <li>
+                                    A conversion-focused marketing site (hero, stats, pricing, FAQ)
+                                </li>
+                                <li>
+                                    A mock signup/login flow using localStorage
+                                </li>
+                                <li>
+                                    A mock checkout flow that creates a simulated account
+                                </li>
+                                <li>
+                                    A protected trader dashboard rendering that mock account
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section class="section section-alt">
+            <div class="container">
+
+                <div class="section-head">
+                    <span class="eyebrow">Our Approach</span>
+
+                    <h2>Built with plain HTML, CSS, and JavaScript</h2>
+
+                    <p>
+                        No frameworks, no backend, no build step — everything runs directly in the browser.
+                    </p>
+                </div>
+
+                <div class="steps-grid">
+
+                    <div class="step-card">
+                        <div class="step-num">1</div>
+                        <h4>Static Pages</h4>
+                        <p>
+                            Every page is a plain HTML file styled with a shared stylesheet.
+                        </p>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="step-num">2</div>
+                        <h4>Mock Auth</h4>
+                        <p>
+                            Signup and login are simulated with the browser's localStorage.
+                        </p>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="step-num">3</div>
+                        <h4>Mock Checkout</h4>
+                        <p>
+                            Buying a "challenge" creates a simulated account record locally.
+                        </p>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="step-num">4</div>
+                        <h4>Dashboard</h4>
+                        <p>
+                            The dashboard reads and renders that simulated account data.
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+
+            <p class="footer-disclaimer">
+                ApexFund is a portfolio/demo project. All trading, funding, and payouts shown
+                are simulated for demonstration purposes only. This is not a real financial
+                product or service.
+            </p>
+
+            <div class="footer-grid">
+
+                <div class="footer-brand">
+                    <div class="nav-brand" style="margin-bottom: 10px;">
+                        <span class="mark">A</span> ApexFund
+                    </div>
+
+                    <p>
+                        A demo funded-trading experience built for portfolio purposes.
+                    </p>
+                </div>
+
+                <div>
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="faq.html">FAQ</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4>Product</h4>
+                    <ul>
+                        <li><a href="pricing.html">Pricing</a></li>
+                        <li><a href="signup.html">Sign Up</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4>Account</h4>
+                    <ul>
+                        <li><a href="login.html">Login</a></li>
+                        <li><a href="dashboard.html">Dashboard</a></li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="footer-bottom">
+                &copy; 2026 ApexFund Demo. Built for portfolio purposes only.
+            </div>
+
+        </div>
+    </footer>
+
+    <script src="js/data.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/nav.js"></script>
+    <script src="js/theme.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+
+    <script>
+        (function () {
+            var t = localStorage.getItem("theme");
+            if (t) {
+                document.documentElement.setAttribute("data-theme", t);
+            }
+        })();
+    </script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>FAQ - ApexFund</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <div class="demo-banner">
+        Demo portfolio project — no real accounts, payments, or trading capital.
+    </div>
+
+    <header class="site-header">
+        <nav class="nav container">
+
+            <a href="index.html" class="nav-brand">
+                <span class="mark">A</span> ApexFund
+            </a>
+
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="pricing.html">Pricing</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+            </ul>
+
+            <div class="nav-actions-group">
+                <div class="nav-actions" id="navActions"></div>
+
+                <button
+                    id="themeToggle"
+                    class="theme-toggle"
+                    aria-label="Toggle dark/light theme"
+                    type="button"
+                >
+                    &#127769;
+                </button>
+            </div>
+
+            <button
+                class="nav-toggle"
+                aria-label="Toggle menu"
+                type="button"
+            >
+                &#9776;
+            </button>
+
+        </nav>
+    </header>
+
+</body>
+</html>
+<section class="section">
+    <div class="container" style="max-width: 760px;">
+
+        <div class="section-head">
+            <span class="eyebrow">FAQ</span>
+            <h2>Frequently asked questions</h2>
+        </div>
+
+        <div id="faqList">
+
+            <div class="faq-item">
+                <div class="faq-q">
+                    How does the evaluation work?
+                    <span class="chevron">&#9660;</span>
+                </div>
+
+                <div class="faq-a">
+                    <p>
+                        You trade a simulated demo account and try to hit the profit target
+                        for your plan while staying within the max drawdown rules. This is
+                        entirely simulated — no real capital is at risk anywhere in this demo.
+                    </p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-q">
+                    How fast are payouts?
+                    <span class="chevron">&#9660;</span>
+                </div>
+
+                <div class="faq-a">
+                    <p>
+                        In this demo, the dashboard shows a static mock payout history to
+                        illustrate what a 24-hour payout cadence would look like on a real platform.
+                    </p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-q">
+                    What's the profit split?
+                    <span class="chevron">&#9660;</span>
+                </div>
+
+                <div class="faq-a">
+                    <p>
+                        Most simulated plans on this demo show a 90% split, with Instant Funding
+                        plans shown at 80% purely as example numbers.
+                    </p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-q">
+                    Is this a real trading platform?
+                    <span class="chevron">&#9660;</span>
+                </div>
+
+                <div class="faq-a">
+                    <p>
+                        No. ApexFund is a portfolio project built to demonstrate a marketing site,
+                        mock checkout, and mock dashboard. There is no real brokerage, capital,
+                        or payment processing involved.
+                    </p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-q">
+                    Where is my account data stored?
+                    <span class="chevron">&#9660;</span>
+                </div>
+
+                <div class="faq-a">
+                    <p>
+                        Entirely in your browser's localStorage. Nothing is sent to a server,
+                        and clearing your browser data will remove your demo account.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<footer class="site-footer">
+    <div class="container">
+
+        <p class="footer-disclaimer">
+            ApexFund is a portfolio/demo project. All trading, funding, and payouts shown
+            are simulated for demonstration purposes only. This is not a real financial
+            product or offer.
+        </p>
+
+        <div class="footer-grid">
+
+            <div class="footer-brand">
+                <div class="nav-brand" style="margin-bottom: 10px;">
+                    <span class="mark">A</span> ApexFund
+                </div>
+
+                <p>
+                    A demo funded-trading experience built for portfolio purposes.
+                </p>
+            </div>
+
+            <div>
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4>Product</h4>
+                <ul>
+                    <li><a href="pricing.html">Pricing</a></li>
+                    <li><a href="signup.html">Sign Up</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4>Account</h4>
+                <ul>
+                    <li><a href="login.html">Login</a></li>
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                </ul>
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+            &copy; 2026 ApexFund Demo. Built for portfolio purposes only.
+        </div>
+
+    </div>
+</footer>
+
+<script src="js/data.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/nav.js"></script>
+<script src="js/theme.js"></script>
+<script src="js/faq.js"></script>
+
+</body>
+</html>

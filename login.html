@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+
+    <script>
+        (function () {
+            var t = localStorage.getItem("theme");
+            if (t) {
+                document.documentElement.setAttribute("data-theme", t);
+            }
+        })();
+    </script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login - ApexFund</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <header class="site-header">
+        <nav class="nav container">
+
+            <a href="index.html" class="nav-brand">
+                <span class="mark">A</span> ApexFund
+            </a>
+
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="pricing.html">Pricing</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+            </ul>
+
+            <div class="nav-actions-group">
+                <div class="nav-actions" id="navActions"></div>
+
+                <button
+                    id="themeToggle"
+                    class="theme-toggle"
+                    aria-label="Toggle dark/light theme"
+                    type="button"
+                >
+                    &#127769;
+                </button>
+            </div>
+
+            <button
+                class="nav-toggle"
+                aria-label="Toggle menu"
+                type="button"
+            >
+                &#9776;
+            </button>
+
+        </nav>
+    </header>
+
+    <main>
+        <div class="auth-shell">
+
+            <div class="auth-card">
+
+                <h1>Welcome back</h1>
+
+                <p class="sub">
+                    Log in to view your demo trading dashboard.
+                </p>
+
+                <div id="formMsg"></div>
+
+                <form id="loginForm">
+
+                    <div class="field">
+                        <label for="email">Email</label>
+
+                        <input
+                            type="email"
+                            id="email"
+                            required
+                            autocomplete="email"
+                        >
+                    </div>
+
+                    <div class="field">
+                        <label for="password">Password</label>
+
+                        <input
+                            type="password"
+                            id="password"
+                            required
+                            autocomplete="current-password"
+                        >
+                    </div>
+
+                    <button
+                        type="submit"
+                        class="btn btn-primary btn-block"
+                    >
+                        Log In
+                    </button>
+
+                </form>
+
+                <div class="auth-foot">
+                    Don't have an account?
+                    <a href="signup.html">Sign up</a>
+                </div>
+
+            </div>
+
+        </div>
+    </main>
+
+    <script src="js/data.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/nav.js"></script>
+    <script src="js/theme.js"></script>
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+
+        if (getSession()) {
+            window.location.href =
+                params.get("next") || "dashboard.html";
+        }
+
+        document
+            .getElementById("loginForm")
+            .addEventListener("submit", (e) => {
+                e.preventDefault();
+
+                const email = document
+                    .getElementById("email")
+                    .value
+                    .trim();
+
+                const password = document
+                    .getElementById("password")
+                    .value;
+
+                const result = login({
+                    email,
+                    password
+                });
+
+                const msg = document.getElementById("formMsg");
+
+                if (!result.ok) {
+                    msg.innerHTML =
+                        `<div class="form-msg error">${result.error}</div>`;
+                    return;
+                }
+
+                window.location.href =
+                    params.get("next") || "dashboard.html";
+            });
+    </script>
+
+</body>
+</html>

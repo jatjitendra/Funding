@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+
+    <script>
+        (function () {
+            var t = localStorage.getItem("theme");
+            if (t) {
+                document.documentElement.setAttribute("data-theme", t);
+            }
+        })();
+    </script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard - ApexFund</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <header class="site-header">
+        <nav class="nav container">
+
+            <a href="index.html" class="nav-brand">
+                <span class="mark">A</span> ApexFund
+            </a>
+
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="pricing.html">Pricing</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+            </ul>
+
+            <div class="nav-actions-group">
+                <div class="nav-actions" id="navActions"></div>
+
+                <button
+                    id="themeToggle"
+                    class="theme-toggle"
+                    aria-label="Toggle dark/light theme"
+                    type="button"
+                >
+                    &#127769;
+                </button>
+            </div>
+
+            <button
+                class="nav-toggle"
+                aria-label="Toggle menu"
+                type="button"
+            >
+                &#9776;
+            </button>
+
+        </nav>
+    </header>
+
+    <div class="dash-header">
+        <div class="container">
+            <h1 id="dashGreeting">Dashboard</h1>
+
+            <p>
+                Simulated trading accounts — all data below is mock data for demo purposes.
+            </p>
+        </div>
+    </div>
+
+    <main>
+        <div class="container" id="dashRoot">
+            <!-- Dashboard content is populated by dashboard.js -->
+        </div>
+    </main>
+
+    <script src="js/data.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/nav.js"></script>
+    <script src="js/theme.js"></script>
+    <script src="js/dashboard.js"></script>
+
+</body>
+</html>

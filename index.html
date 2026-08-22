@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+
+    <script>
+        (function () {
+            var t = localStorage.getItem("theme");
+            if (t) {
+                document.documentElement.setAttribute("data-theme", t);
+            }
+        })();
+    </script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ApexFund - Trade With Our Capital</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <header class="site-header">
+        <nav class="nav container">
+
+            <a href="index.html" class="nav-brand">
+                <span class="mark">A</span> ApexFund
+            </a>
+
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="pricing.html">Pricing</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+            </ul>
+
+            <div class="nav-actions-group">
+                <div class="nav-actions" id="navActions"></div>
+
+                <button
+                    id="themeToggle"
+                    class="theme-toggle"
+                    aria-label="Toggle dark/light theme"
+                    type="button"
+                >
+                    &#127769;
+                </button>
+            </div>
+
+            <button
+                class="nav-toggle"
+                aria-label="Toggle menu"
+                type="button"
+            >
+                &#9776;
+            </button>
+
+        </nav>
+    </header>
+
+    <main>
+
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container hero-grid">
+
+                <div class="hero-copy">
+                    <h1>
+                        Trade with our capital.<br>
+                        Keep <span>the profits.</span>
+                    </h1>
+
+                    <p class="lede">
+                        Pass a simulated evaluation, get funded on a demo account,
+                        and keep 80% of the profits. Trusted by Indian traders.
+                    </p>
+
+                    <div class="hero-ctas">
+                        <a href="pricing.html" class="btn btn-primary">
+                            Buy Challenge
+                        </a>
+
+                        <a href="faq.html" class="btn btn-ghost-light">
+                            How It Works
+                        </a>
+                    </div>
+                </div>
+
+                <div class="hero-chart-panel" id="heroChartPanel">
+
+                    <div class="chart-panel-head">
+                        <div class="chart-pair">
+                            <span class="chart-dot" id="chartDot"></span>
+                            Binance Futures &middot;
+                            <span id="chartStatus">Connecting&hellip;</span>
+                        </div>
+                    </div>
+
+                    <div class="market-list" id="marketList">
+
+                        <!-- Bitcoin -->
+                        <div class="market-row" data-symbol="BTCUSDT">
+
+                            <div class="market-coin">
+                                <span class="coin-badge coin-btc">&#8383;</span>
+
+                                <div>
+                                    <div class="coin-name">Bitcoin</div>
+                                    <div class="coin-pair">BTC/USDT Perp</div>
+                                </div>
+                            </div>
+
+                            <div class="market-price">
+                                <div class="price-value" id="priceBTC">&mdash;</div>
+                                <div class="price-change" id="changeBTC">&mdash;</div>
+                            </div>
+
+                            <div class="market-volume">
+                                <div class="vol-label">24h Volume</div>
+                                <div class="vol-value" id="volBTC">&mdash;</div>
+                            </div>
+
+                        </div>
+
+                        <!-- Ethereum -->
+                        <div class="market-row" data-symbol="ETHUSDT">
+
+                            <div class="market-coin">
+                                <span class="coin-badge coin-eth">&xi;</span>
+
+                                <div>
+                                    <div class="coin-name">Ethereum</div>
+                                    <div class="coin-pair">ETH/USDT Perp</div>
+                                </div>
+                            </div>
+
+                            <div class="market-price">
+                                <div class="price-value" id="priceETH">&mdash;</div>
+                                <div class="price-change" id="changeETH">&mdash;</div>
+                            </div>
+
+                            <div class="market-volume">
+                                <div class="vol-label">24h Volume</div>
+                                <div class="vol-value" id="volETH">&mdash;</div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Stats Section -->
+        <section class="stats">
+            <div class="container">
+
+                <div class="stats-grid">
+
+                    <div class="stat-card">
+                        <div class="stat-num">80%</div>
+                        <div class="stat-label">Profit Split</div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-num-row">
+                            <span class="stat-num">24h</span>
+
+                            <button
+                                type="button"
+                                class="info-btn"
+                                id="payoutInfoBtn"
+                                aria-expanded="false"
+                            >
+                                i
+                            </button>
+                        </div>
+
+                        <div class="stat-label">Payout Speed</div>
+
+                        <div class="info-popover" id="payoutInfoPopover">
+                            Upon reaching the minimum payout of &#8377;1,000.
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-num">10+</div>
+                        <div class="stat-label">Accounts Funded</div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-num">&#8377;100K</div>
+                        <div class="stat-label">Total Rewards Paid</div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Payout & Assets Options -->
+        <section class="section section-dark">
+            <div class="container">
+
+                <div class="section-head">
+                    <span class="eyebrow">Payout &amp; Assets Options</span>
+
+                    <h2>
+                        You trade easily. We pay even more easily.
+                    </h2>
+                </div>
+
+                <div class="methods-grid methods-grid-3">
+
+                    <div class="method-card method-card-dark">
+                        <div class="icon">&#128241;</div>
+                        <h4>UPI</h4>
+                    </div>
+
+                    <div class="method-card method-card-dark">
+                        <div class="icon">&#127974;</div>
+                        <h4>Bank Transfer</h4>
+                    </div>
+
+                    <div class="method-card method-card-dark">
+
+                        <div class="trade-icons">
+                            <span class="icon icon-btc">&#8383;</span>
+                            <span class="icon icon-eth">&xi;</span>
+                        </div>
+
+                        <h4>Trading Options</h4>
+
+                        <p class="method-hint">
+                            BTC/USDT &amp; ETH/USDT
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Challenge Plans -->
+        <section class="section section-dark">
+            <div class="container">
+
+                <div class="section-head">
+                    <span class="eyebrow">Challenge Plans</span>
+                    <h2>Choose your account size</h2>
+                </div>
+
+                <div class="plans-grid plans-grid-3">
+
+                    <!-- ₹10,000 Plan -->
+                    <div class="plan-card plan-card-dark">
+
+                        <h3>&#8377;10,000 Account</h3>
+
+                        <div class="plan-price">
+                            <span class="price-strike">&#8377;499</span>
+                            &#8377;399
+                            <small>one-time</small>
+                        </div>
+
+                        <ul>
+                            <li>Two-Step Evaluation</li>
+                            <li>Flat 80% profit split</li>
+                            <li>No time limit</li>
+                            <li>Max daily loss: 5%</li>
+                            <li>Max total loss: 10%</li>
+                        </ul>
+
+                        <a
+                            href="checkout.html?plan=two-step-10000"
+                            class="btn btn-ghost-light btn-block"
+                        >
+                            Select Plan
+                        </a>
+
+                    </div>
+
+                    <!-- ₹20,000 Plan -->
+                    <div class="plan-card plan-card-dark">
+
+                        <span class="plan-badge">Most Popular</span>
+
+                        <h3>&#8377;20,000 Account</h3>
+
+                        <div class="plan-price">
+                            <span class="price-strike">&#8377;799</span>
+                            &#8377;699
+                            <small>one-time</small>
+                        </div>
+
+                        <ul>
+                            <li>Two-Step Evaluation</li>
+                            <li>Flat 80% profit split</li>
+                            <li>No time limit</li>
+                            <li>Max daily loss: 5%</li>
+                            <li>Max total loss: 10%</li>
+                        </ul>
+
+                        <a
+                            href="checkout.html?plan=two-step-20000"
+                            class="btn btn-ghost-light btn-block"
+                        >
+                            Select Plan
+                        </a>
+
+                    </div>
+
+                    <!-- ₹40,000 Plan -->
+                    <div class="plan-card plan-card-dark">
+
+                        <h3>&#8377;40,000 Account</h3>
+
+                        <div class="plan-price">
+                            <span class="price-strike">&#8377;999</span>
+                            &#8377;899
+                            <small>one-time</small>
+                        </div>
+
+                        <ul>
+                            <li>Two-Step Evaluation</li>
+                            <li>Flat 80% profit split</li>
+                            <li>No time limit</li>
+                            <li>Max daily loss: 5%</li>
+                            <li>Max total loss: 10%</li>
+                        </ul>
+
+                        <a
+                            href="checkout.html?plan=two-step-40000"
+                            class="btn btn-ghost-light btn-block"
+                        >
+                            Select Plan
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- How It Works -->
+        <section class="section section-dark">
+            <div class="container">
+
+                <div class="section-head section-head-tight">
+                    <span class="eyebrow">How It Works</span>
+                </div>
+
+                <div class="stairs">
+
+                    <div class="stair-step stair-1">
+                        <div class="stair-platform">
+                            <div class="stair-num">1</div>
+                            <div class="stair-icon">&#9989;</div>
+                        </div>
+
+                        <h4>Get verified &amp; buy challenge</h4>
+                    </div>
+
+                    <div class="stair-step stair-2">
+                        <div class="stair-platform">
+                            <div class="stair-num">2</div>
+                            <div class="stair-icon stair-icon-small">
+                                &#127881;
+                            </div>
+                        </div>
+
+                        <h4>Pass Phase 1</h4>
+                    </div>
+
+                    <div class="stair-step stair-3">
+                        <div class="stair-platform">
+                            <div class="stair-num">3</div>
+                            <div class="stair-icon stair-icon-big">
+                                &#129351;
+                            </div>
+                        </div>
+
+                        <h4>Pass Phase 2</h4>
+                    </div>
+
+                    <div class="stair-step stair-4">
+                        <div class="stair-platform">
+                            <div class="stair-num">4</div>
+                            <div class="stair-icon stair-icon-trophy">
+                                &#127942;
+                            </div>
+                        </div>
+
+                        <h4>Get funded &amp; start earning</h4>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="section section-dark">
+            <div class="container">
+
+                <div class="contact-card">
+
+                    <div class="contact-info">
+                        <h2>Need help? Contact us</h2>
+
+                        <p>
+                            Our team is on hand around the clock to help with evaluations,
+                            payouts, and platform setup. Drop us a message and we'll get back to you.
+                        </p>
+                    </div>
+
+                    <form
+                        id="contactForm"
+                        class="contact-form"
+                        novalidate
+                    >
+
+                        <div class="field-row">
+
+                            <div class="field">
+                                <label for="contactName">Name</label>
+
+                                <input
+                                    type="text"
+                                    id="contactName"
+                                    name="name"
+                                    required
+                                    autocomplete="name"
+                                >
+                            </div>
+
+                            <div class="field">
+                                <label for="contactMobile">Mobile Number</label>
+
+                                <input
+                                    type="tel"
+                                    id="contactMobile"
+                                    name="mobile"
+                                    required
+                                    autocomplete="tel"
+                                >
+                            </div>
+
+                        </div>
+
+                        <div class="field">
+                            <label for="contactEmail">Email</label>
+
+                            <input
+                                type="email"
+                                id="contactEmail"
+                                name="email"
+                                required
+                                autocomplete="email"
+                            >
+                        </div>
+
+                        <div class="field">
+                            <label for="contactMessage">
+                                Message
+                                <span class="optional">(optional)</span>
+                            </label>
+
+                            <textarea
+                                id="contactMessage"
+                                name="message"
+                                rows="3"
+                            ></textarea>
+                        </div>
+
+                        <button
+                            type="submit"
+                            class="btn btn-primary btn-block"
+                        >
+                            Send Message
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+
+            <p class="footer-disclaimer">
+                ApexFund is a portfolio/demo project. All trading, funding, and payouts shown
+                are simulated for demonstration purposes only. This is not a real financial
+                product or offer.
+            </p>
+
+            <div class="footer-grid">
+
+                <div class="footer-brand">
+
+                    <div class="nav-brand" style="margin-bottom: 10px;">
+                        <span class="mark">A</span> ApexFund
+                    </div>
+
+                    <p>
+                        A demo funded-trading experience built for portfolio purposes.
+                    </p>
+
+                </div>
+
+                <div>
+                    <h4>Company</h4>
+
+                    <ul>
+                        <li>
+                            <a href="about.html">About Us</a>
+                        </li>
+                        <li>
+                            <a href="faq.html">FAQ</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4>Product</h4>
+
+                    <ul>
+                        <li>
+                            <a href="pricing.html">Pricing</a>
+                        </li>
+                        <li>
+                            <a href="signup.html">Sign Up</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4>Account</h4>
+
+                    <ul>
+                        <li>
+                            <a href="login.html">Login</a>
+                        </li>
+                        <li>
+                            <a href="dashboard.html">Dashboard</a>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="footer-bottom">
+                &copy; 2026 ApexFund Demo. Built for portfolio purposes only.
+            </div>
+
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="js/data.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/nav.js"></script>
+    <script src="js/theme.js"></script>
+    <script src="js/market-ticker.js"></script>
+    <script src="js/stats-info.js"></script>
+    <script src="js/contact.js"></script>
+
+</body>
+</html>
