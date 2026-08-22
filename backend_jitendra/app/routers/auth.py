@@ -7,6 +7,7 @@ from __future__ import annotations
 
 from fastapi import APIRouter, HTTPException, Response, status
 from sqlalchemy import func, select
+from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
 from ..deps import CurrentUser, DbSession
@@ -44,7 +45,19 @@ def signup(payload: SignupRequest, db: DbSession) -> TokenResponse:
     )
 
     db.add(user)
-    db.commit()
+
+    try:
+        db.commit()
+    except IntegrityError as exc:
+        # The check above is not atomic; the unique index on lower(email) is what
+        # actually decides the race between two concurrent signups.
+        db.rollback()
+
+        raise HTTPException(
+            status_code=status.HTTP_409_CONFLICT,
+            detail="An account with that email already exists.",
+        ) from exc
+
     db.refresh(user)
 
     return _token_response(user)

@@ -4,7 +4,19 @@ from __future__ import annotations
 
 from datetime import date, datetime, timezone
 
-from sqlalchemy import Boolean, Date, DateTime, ForeignKey, Integer, Numeric, String, Text, UniqueConstraint
+from sqlalchemy import (
+    Boolean,
+    Date,
+    DateTime,
+    ForeignKey,
+    Index,
+    Integer,
+    Numeric,
+    String,
+    Text,
+    UniqueConstraint,
+    text,
+)
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from .database import Base
@@ -16,6 +28,10 @@ def utcnow() -> datetime:
 
 class User(Base):
     __tablename__ = "users"
+    # Emails are compared case-insensitively throughout, so uniqueness has to be
+    # enforced the same way. Without this, two concurrent signups differing only
+    # in case both pass the application's existence check and both insert.
+    __table_args__ = (Index("uq_users_email_lower", text("lower(email)"), unique=True),)
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
     name: Mapped[str] = mapped_column(String(120), nullable=False)

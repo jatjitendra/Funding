@@ -29,7 +29,9 @@ Then open:
 
 Tables are created and the three challenge plans are seeded automatically on
 startup. With no `DATABASE_URL` set, data goes to `backend_jitendra/apexfund.db`
-(SQLite), so there is nothing to install.
+(SQLite), so there is nothing to install. For Postgres, apply the schema from
+[`../database_postgres`](../database_postgres) first — see
+[Switching to Postgres](#switching-to-postgres).
 
 To confirm the whole flow works, with the server running:
 
@@ -161,6 +163,8 @@ Every variable is optional; see `.env.example`.
 | Variable | Default | Purpose |
 | --- | --- | --- |
 | `DATABASE_URL` | SQLite file in this folder | Use `postgresql+psycopg://user:pass@host:5432/apexfund` for Postgres |
+| `AUTO_CREATE_TABLES` | `true` on SQLite, `false` otherwise | Whether the app creates tables at startup. Keep it off when `database_postgres/` owns the schema |
+| `SEED_PLANS_ON_STARTUP` | `true` | Idempotent upsert of the three challenge plans |
 | `SECRET_KEY` | `dev-secret-change-me` | JWT signing key — **must** be changed outside local development |
 | `ACCESS_TOKEN_TTL_MINUTES` | `10080` (7 days) | Token lifetime |
 | `SERVE_FRONTEND` | `true` | Serve the static site from this process |
@@ -171,15 +175,28 @@ Every variable is optional; see `.env.example`.
 
 ### Switching to Postgres
 
+The schema lives in [`../database_postgres`](../database_postgres) as versioned
+SQL, so apply it from there rather than letting the ORM create tables:
+
 ```bash
-createdb apexfund
-export DATABASE_URL="postgresql+psycopg://$USER@localhost:5432/apexfund"
+cd ../database_postgres
+cp .env.example .env                      # edit DATABASE_URL
+./scripts/apply.sh --create-db            # tables, indexes, views, seed, roles
+
+cd ../backend_jitendra
+export DATABASE_URL="postgresql+psycopg://apexfund:<password>@127.0.0.1:5432/apexfund"
+export AUTO_CREATE_TABLES=false
 uvicorn app.main:app --reload
 ```
 
-Tables are created on startup, so no migration step is needed. There is no
-migration tool wired up yet — worth adding Alembic before any schema changes
-land on a database you care about.
+`AUTO_CREATE_TABLES` already defaults to `false` for any non-SQLite URL, so the
+app will not create tables behind the SQL's back; setting it explicitly just
+documents the intent. That folder also has a `docker-compose.yml` if you would
+rather not install Postgres.
+
+There is still no migration tool wired up. The SQL scripts are additive and
+idempotent, which is enough while the schema only grows — add Alembic before
+changing or dropping a column on a database with data you care about.
 
 ## Layout
 

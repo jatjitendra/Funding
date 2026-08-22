@@ -1,0 +1,48 @@
+# Local PostgreSQL for ApexFund.
+#
+#   docker compose up -d
+#   docker compose logs -f postgres     # watch the schema being applied
+#   docker compose down -v              # stop and delete the volume
+#
+# Files in ./sql are mounted read-only into the image's init directory, which
+# runs every *.sql it finds in filename order on first boot only. That covers
+# 001..005; verify.sql, drop_all.sql and optional_demo_data.sql are mounted
+# individually so they are available to run by hand but are not auto-applied.
+#
+# Because init scripts only run when the data directory is empty, re-running
+# `docker compose up` against an existing volume applies nothing. Use
+# ./scripts/apply.sh for changes, or `docker compose down -v` to start over.
+
+services:
+  postgres:
+    image: postgres:18-alpine
+    container_name: apexfund-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-apexfund}
+      POSTGRES_USER: ${POSTGRES_USER:-apexfund}
+      # Local-only default. Anything reachable from another machine needs a real
+      # secret supplied through the environment instead.
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-apexfund_local_only}
+      POSTGRES_INITDB_ARGS: "--encoding=UTF8"
+    ports:
+      # Bound to loopback so the database is not exposed on the network.
+      - "127.0.0.1:${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - apexfund_pgdata:/var/lib/postgresql/data
+      - ./sql/001_tables.sql:/docker-entrypoint-initdb.d/001_tables.sql:ro
+      - ./sql/002_indexes.sql:/docker-entrypoint-initdb.d/002_indexes.sql:ro
+      - ./sql/003_views.sql:/docker-entrypoint-initdb.d/003_views.sql:ro
+      - ./sql/004_seed_plans.sql:/docker-entrypoint-initdb.d/004_seed_plans.sql:ro
+      - ./sql/005_roles_grants.sql:/docker-entrypoint-initdb.d/005_roles_grants.sql:ro
+      - ./sql:/opt/apexfund/sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-apexfund} -d ${POSTGRES_DB:-apexfund}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+
+volumes:
+  apexfund_pgdata:
+    name: apexfund_pgdata

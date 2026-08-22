@@ -42,6 +42,12 @@ class Settings:
             f"sqlite:///{BACKEND_DIR / 'apexfund.db'}",
         )
 
+        # SQLite development databases are created on demand. When Postgres owns
+        # the schema (see database_postgres/), the DDL lives in versioned SQL and
+        # the app must not quietly create tables that differ from it.
+        self.auto_create_tables = _as_bool(os.getenv("AUTO_CREATE_TABLES"), self.is_sqlite)
+        self.seed_plans_on_startup = _as_bool(os.getenv("SEED_PLANS_ON_STARTUP"), True)
+
         self.secret_key = os.getenv("SECRET_KEY", "dev-secret-change-me")
         self.jwt_algorithm = "HS256"
         self.access_token_ttl_minutes = _as_int(os.getenv("ACCESS_TOKEN_TTL_MINUTES"), 60 * 24 * 7)

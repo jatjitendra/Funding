@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import logging
 from contextlib import asynccontextmanager
 from pathlib import Path
 
@@ -10,6 +11,7 @@ from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
+from sqlalchemy.exc import SQLAlchemyError
 
 from . import __version__
 from .config import settings
@@ -17,6 +19,8 @@ from .database import Base, SessionLocal, engine
 from .routers import accounts, auth, checkout, contact, market, plans, stats
 from .schemas import HealthResponse
 from .seed import seed_plans
+
+logger = logging.getLogger(__name__)
 
 DESCRIPTION = """
 Backend for the ApexFund demo funded-trading site.
@@ -32,10 +36,21 @@ and no card details are stored.
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    Base.metadata.create_all(bind=engine)
+    if settings.auto_create_tables:
+        Base.metadata.create_all(bind=engine)
 
-    with SessionLocal() as db:
-        seed_plans(db)
+    if settings.seed_plans_on_startup:
+        try:
+            with SessionLocal() as db:
+                seed_plans(db)
+        except SQLAlchemyError:
+            # Most likely the schema has not been applied yet. Fail loudly in the
+            # log but let the app start, so /api/health stays reachable for
+            # whoever is debugging the deployment.
+            logger.exception(
+                "Could not seed challenge plans. If Postgres owns the schema, apply it first: "
+                "cd database_postgres && ./scripts/apply.sh --create-db"
+            )
 
     yield
 
